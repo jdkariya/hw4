@@ -1,29 +1,53 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tacostagram Final</title>
+    <title>Travel Journal</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <link rel="stylesheet" href="/stylesheets/application.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
   </head>
 
   <body>
-    <div>
-      <%= flash["notice"] %>
+      <nav class="navbar navbar-expand-lg bg-warning">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="btn btn-default" aria-current="page" href="/places">Home</a>
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex flex-row-reverse">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <div>
+                <% if @current_user %>
+                    <span class="navbar-text">Logged in as: <%= @current_user["username"]%></span>
+                    <a href="/logout" class="btn btn-default">Logout</a>
+                    <% else %>
+                  <!-- TODO: if logged in user, hide Login and Sign Up -->
+                    <a href="/login" class="btn btn-default">Login</a> |
+                    <a href="/users/new" class="btn btn-default">Sign Up</a>
+                    <% end %>
+              </div>
+            </li>
+          </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col text-center">
+          <%= flash["notice"] %>
+        </div>
+      </div>
+      <%= yield %>
     </div>
-    <div>
-      <% if @current_user %>
-          <%= @current_user["username"]%>
-          <a href="/logout" class="btn btn-default">Logout</a>
-          <% else %>
-        <!-- TODO: if logged in user, hide Login and Sign Up -->
-          <a href="/login" class="btn btn-default">Login</a> |
-          <a href="/users/new" class="btn btn-default">Sign Up</a>
-          <% end %>
-    </div>
-
-    <%= yield %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
   </body>
 </html>
