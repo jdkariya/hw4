@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "/", :controller => "places", :action => "index"
+  root 'places#index'
   get "/logout", :controller => "sessions", :action => "destroy"
   get "/login", :controller => "sessions", :action => "new"
 
